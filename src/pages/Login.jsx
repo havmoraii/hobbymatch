@@ -6,7 +6,12 @@ export default function Login() {
   const [mensaje, setMensaje] = useState('')
 
   const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOtp({ email })
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: 'https://hobbymatch-two.vercel.app'
+      }
+    })
     if (error) setMensaje('Error: ' + error.message)
     else setMensaje('Revisa tu correo, te enviamos un link 🎉')
   }
