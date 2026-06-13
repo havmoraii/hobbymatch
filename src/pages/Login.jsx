@@ -11,10 +11,20 @@ export default function Login() {
 
   const handleSubmit = async () => {
     if (esRegistro) {
-      const { error } = await supabase.auth.signUp({ email, password })
-      if (error) setMensaje('Error: ' + error.message)
-      else setMensaje('Cuenta creada, ahora inicia sesión')
-      setEsRegistro(false)
+      const { error } = await supabase.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          emailRedirectTo: null
+        }
+      })
+      if (error) {
+        setMensaje('Error: ' + error.message)
+      } else {
+        const { error: loginError } = await supabase.auth.signInWithPassword({ email, password })
+        if (!loginError) navigate('/crear-perfil')
+        else setMensaje('Cuenta creada, ahora inicia sesión')
+      }
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) setMensaje('Error: ' + error.message)
