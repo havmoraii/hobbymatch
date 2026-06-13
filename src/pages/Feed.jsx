@@ -64,8 +64,11 @@ export default function Feed() {
         </button>
       </div>
       <div className="border rounded-xl p-4 flex flex-col gap-3 shadow">
-        <div className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
-          Sin foto
+        <div className="w-full h-48 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center text-gray-400">
+          {perfil.foto_url
+            ? <img src={perfil.foto_url} alt="foto" className="w-full h-full object-cover" />
+            : <span>Sin foto</span>
+          }
         </div>
         <h2 className="text-lg font-semibold">{perfil.nombre}, {perfil.edad}</h2>
         <p className="text-sm text-gray-500">{perfil.ciudad}</p>
