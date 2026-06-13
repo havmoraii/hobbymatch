@@ -9,7 +9,7 @@ export default function Login() {
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: window.location.origin
+        emailRedirectTo: 'https://hobbymatch-two.vercel.app/auth/callback'
       }
     })
     if (error) setMensaje('Error: ' + error.message)
