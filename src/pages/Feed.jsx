@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
+import { useNavigate } from 'react-router-dom'
 
 export default function Feed() {
   const [perfiles, setPerfiles] = useState([])
   const [miId, setMiId] = useState(null)
   const [misIntereses, setMisIntereses] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     cargarPerfiles()
@@ -55,7 +57,12 @@ export default function Feed() {
 
   return (
     <div className="max-w-sm mx-auto p-6 flex flex-col gap-4 mt-10">
-      <h1 className="text-xl font-bold text-center">HobbyMatch</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-bold">HobbyMatch</h1>
+        <button onClick={() => navigate('/matches')} className="text-sm underline">
+          Mis matches
+        </button>
+      </div>
       <div className="border rounded-xl p-4 flex flex-col gap-3 shadow">
         <div className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
           Sin foto
